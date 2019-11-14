@@ -73,11 +73,13 @@ class NotesAutomation:
         os.system(command)
 
     def findFileInFolder(self, folder) : 
+        print(self.fileName, " ", self.extension)
+        print(folder)
         if os.path.isdir(self.path + "/" + folder) :
             self.path = self.path + "/" + folder
             self.findFile(self.fileName, "" , self.path)
         else : 
-            self.path = self.findFolder(folder, "", self.path)
+            # self.path = self.findFolder(folder, "", self.path)
             self.findFile(self.fileName, "" , self.path)
 
     def findFile(self, fileToFind, folderToSearch, thepath) : 
@@ -101,6 +103,15 @@ class NotesAutomation:
         if not fileExists:
             self.path = os.path.join(pathToFolder ,self.fileName + self.extension)
             open(self.path, "a").close()
+        command = "code " + self.fileName
+        os.system(command)
+    def createFile(self) :
+        self.fileName += self.extension
+        print(self.fileName)
+        path = os.path.join(self.notesFolder,self.fileName)
+        open(path, "a").close
+        command = "code " + path
+        os.system(command)
 
 
 if __name__ == "__main__":
@@ -116,6 +127,5 @@ if __name__ == "__main__":
         except Exception:
             notes.findFileInFolder("")
     else :
-        notes.getArgs(3, 1)
-        notes.findFileInFolder("")
-        
+        notes.getArgs(2, 3)
+        notes.createFile()        
